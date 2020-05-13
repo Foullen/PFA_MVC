@@ -3,12 +3,16 @@ require_once("Model.php");
 class ModelCity extends Model
 {
     private $idCity;
-    private $name;
+    private $nameCity;
 
     protected static $table = 'city';
     protected static $primary = 'idCity';
     public function __construct($idCity = NULL, $name = NULL)
     {
+        if (!is_null($idCity) && !is_null($name)) {
+            $this->idCity = $idCity;
+            $this->name = $name;
+        }
     }
 
     /**
@@ -22,8 +26,8 @@ class ModelCity extends Model
     /**
      * Get the value of name
      */
-    public function getName()
+    public function getNameCity()
     {
-        return $this->name;
+        return $this->nameCity;
     }
 }

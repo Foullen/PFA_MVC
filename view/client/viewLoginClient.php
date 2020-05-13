@@ -30,6 +30,6 @@
         <h2 class="greet-title">Hello There !</h2>
         <span class="greet-bar"></span>
         <h3 class="greet-descrip">Fill up personal information and start Journey with us.</h3>
-        <a href="index/client/join/" class="greet-signup">Sign UP</a>
+        <a href="?index.php&controller=client&action=join" class="greet-signup">Sign UP</a>
     </div>
 </div>

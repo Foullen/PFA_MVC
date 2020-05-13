@@ -1,7 +1,7 @@
 <section id="section1">
     <h2 class="accountTextHeader">Hi,<span class="accountSpanHeader">Foullen</span></h2>
     <article class="articleP1">
-        <a href="#" class="articleP1__link ">Commands(<span class="artibadge">0</span>)</a>
+        <a href="index/client/command/" class="articleP1__link ">Commands(<span class="artibadge">0</span>)</a>
         <a href="index/client/edit/1/" class="articleP1__link ">Edit my profile</a>
         <a href="#" class="articleP1__link ">log out</a>
     </article>

@@ -2,7 +2,7 @@
 require_once("{$ROOT}{$DS}config{$DS}Conf.php");
 class Model
 {
-    private static $pdo;
+    protected static $pdo;
     /*créer une seule instance de la classe PDO*/
     public static function Init()
     {
@@ -56,33 +56,17 @@ class Model
     }
     public function insert($tab)
     {
-        // $place_holders = implode(',', array_fill(0, count($tab), '?'));
-        // $array1 = array_keys($tab);
-        // $array2 = array_values($tab);
-        // print_r($array1);
-        // print_r($array2);
-        // $str = implode(',', array_fill(0, count($array2), ' '));
-        // $sql = "INSERT INTO " . static::$table . "VALUES ($place_holders) ";
-        // echo $sql;
-        // echo $str;
-
-        $values = "(";
-        $columns = " (";
-
-        foreach ($tab as $key => $value) {
-            $columns .= $key . ",";
-            $values .= ":" . $key . ",";
+        $sql = "INSERT INTO " . static::$table . " VALUES(";
+        foreach ($tab as $cle => $valeur) {
+            $sql .= " :" . $cle . ",";
         }
-        $columns .= ")";
-        $columns =  str_replace(",)", ")", $columns);
-        $values .= ")";
-        $values = str_replace(",)", ")", $values);
-
-        $sql = "INSERT INTO " . static::$table . $columns . "VALUES $values;";
-        echo $sql;
-
-        $req_prep = self::$pdo->prepare($sql);
-        $req_prep->execute($tab);
+        $sql = rtrim($sql, ",");
+        $sql .= ");";
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array();
+        foreach ($tab as $cle => $valeur)
+            $values[":" . $cle] = $valeur;
+        $req_prep->execute($values);
     }
 }
 Model::Init();

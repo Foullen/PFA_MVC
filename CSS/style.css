@@ -1240,13 +1240,37 @@ tr.shown td.details-control {
 
 .command_header_title::before {
     position: absolute;
-    height: max-content;
+    height: -webkit-fill-available;
     width: 4px;
     background-color: #3b807e;
     content: "";
     margin-left: -5px;
     bottom: 0px;
     top: 0;
+}
+
+/* account creation page starts here*/
+#accountCreation {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmation__Img {
+    width: 50vw;
+    margin-top: 10vh;
+}
+
+.goBack__link {
+    color: #3b807e;
+}
+
+.goBack__link:hover {
+    transform: scale(1.1);
+    color: #75ffac;
 }
 
 @media screen and (min-width:768px) {
@@ -1683,6 +1707,14 @@ tr.shown td.details-control {
         margin: 1.5em 1.5em;
         font-size: 1.5em;
         font-weight: 500;
+    }
+
+    #ErrorSpan,
+    #ErrorCity {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        color: rgb(245, 18, 18);
     }
 
     /*Products page starts here*/

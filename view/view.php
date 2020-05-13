@@ -44,27 +44,42 @@ if (isset($_REQUEST['controller']) and $_REQUEST['controller'] != 'home') {
 
 <body id="<?= $HTMLbodyId ?>" <?= $HTMLonLoadTag ?>>
     <?php
-    // require_once($ROOT . $DS . "view" . $DS . "header.php");
-    if (isset($_REQUEST['controller']) and isset($_REQUEST['action'])) {
-        if ($_REQUEST['action'] != "join" and $_REQUEST['action'] != "login") {
+    $home_default_conroller = "home";
+    if (!isset($_REQUEST['controller']))
+        $control = $home_default_conroller;
+    else
+        $control = $_REQUEST['controller'];
+
+    switch (strtolower($control)) {
+        case "home":
+        case "product":
             require_once($ROOT . $DS . "view" . $DS . "header.php");
-        }
-        /**
-         * If the controller equal login,signup or admin header(and navbar)
-         * will not shown in view
-         */
-    } else if (!isset($_REQUEST['controller']) or !isset($_REQUEST['action'])) {
-        require_once($ROOT . $DS . "view" . $DS . "header.php");
+            break;
+        case "admin": {
+                if (isset($_REQUEST['action']) and $_REQUEST['action'] != "dashboard") {
+                    require_once($ROOT . $DS . "view" . $DS . "sideNavbar.php");
+                }
+            }
+            break;
+        case "client":
+            if (!isset($_REQUEST['action']))
+                //$controller récupère $controller_default;
+                $act = "account";
+            else
+                // $controller recupère le contrôleur passé dans l'URL
+                $act = $_REQUEST['action'];
+            switch ($act) {
+                case "account":
+                case "cart":
+                case "edit":
+                case "command": {
+                        require_once($ROOT . $DS . "view" . $DS . "header.php");
+                    }
+                    break;
+            }
+            break;
     }
 
-    if (isset($_REQUEST['controller']) and  $_REQUEST['controller'] == 'admin' and isset($_REQUEST['action']) and $_REQUEST['action'] != "dashboard") {
-        require_once($ROOT . $DS . "view" . $DS . "sideNavbar.php");
-    }
-
-    // Si $controleur='voiture' et $view='readAll',
-    // alors $filepath=".../view/voiture/"
-    // $filename="viewReadAllVoiture.php";
-    // et on charge '.../view/voiture/viewReadAllVoiture.php'
     // filepath détermine le chemin de la vue en fonction de $controller
     $filepath = $ROOT . $DS . "view" . $DS . $controller . $DS;
     // filename détermine le nom du fichier

@@ -12,7 +12,7 @@
     <div class="join_wrap">
         <h2 class="join__title">Create new Account</h2>
 
-        <form action="../PHP/signup_verif.php" id="regForm" method="get" class="join__form">
+        <form action="?index.php&controller=client&action=created" id="regForm" method="post" class="join__form">
             <div class="tab partOne_wrap">
                 <h4 class="join__subtitle">Fill these info.</h4>
                 <div class="name-section">
@@ -48,10 +48,13 @@
                         <label for="join__region" class="region-field-label">Region</label>
                         <select class="join__region" name="region" id="join__region">
                             <option>---Choose your city---</option>
-                            <option>Tunis</option>
-                            <option>Manouba</option>
-                            <option>Ben Arous</option>
+                            <?php
+                            foreach ($tab_c as $c) {
+                                echo "<option value=" . $c->getIdCity() . ">" . $c->getNameCity() . "</option>";
+                            }
+                            ?>
                         </select>
+                        <span id="ErrorCity"></span>
                     </div>
                     <div class="addresse-section">
                         <label for="join__addresse" class="addresse-field-label">Addresse</label>
@@ -67,7 +70,8 @@
                 <h4 class="join__subtitle">just these thing and you ready to go</h4>
                 <div class="email-section">
                     <label for="join__email" class="email-field-label">Email</label>
-                    <input type="email" name="email" id="join__email" class="join__email">
+                    <input type="email" name="email" id="join__email" class="join__email" onblur="CheckEmail()">
+                    <span id="ErrorSpan"></span>
                 </div>
                 <div class="pwd-section">
                     <label for="join__name" class="pwd-field-label">Password</label>
@@ -101,6 +105,35 @@
     </div>
 </div>
 <script src="./JS/w3schoolCheat.js"></script>
+<script>
+    function CheckEmail() {
+        var Email = document.getElementById('join__email');
+        if (Email.value != "") {
+            if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else { // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var value = xmlhttp.responseText;
+                    if (value.length > 1) {
+                        document.getElementById('ErrorSpan').innerHTML = "Email Already exist please choose Other Email";
+                        Email.style.color = "#FF0000";
+                        Email.style.backgroundColor = "#ffdddd";
+                        // Email.focus();
+                    } else {
+                        document.getElementById('ErrorSpan').innerHTML = "";
+                        Email.style.color = "";
+                        Email.style.backgroundColor = "";
+                    }
+                }
+            }
+            xmlhttp.open("GET", "?index.php&controller=client&action=check&q=" + Email.value, true);
+            xmlhttp.send();
+        }
+    }
+</script>
 <!-- <script src="./JS/cleave.min.js"></script>
 <script src="./JS/cleave-phone.tn.js"></script>
 

@@ -61,6 +61,15 @@ function validateForm() {
       valid = false;
     }
   }
+  if (currentTab == 1) {
+    if (document.getElementById("join__region").selectedIndex == "0") {
+      document.getElementById("ErrorCity").innerHTML = "Please choose your city";
+      valid = false;
+    } else {
+      document.getElementById("ErrorCity").innerHTML = "";
+    }
+  }
+
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";

@@ -12,15 +12,83 @@ class ModelUser extends Model
     private $email; //User.Email
     private $password; //User.password
     private $gender; //User.gender
+    private $idCity; //User.idCity
     private $role; //User.role
     private $uStatus; //User.status 
-    private $cityId; //User.idCity
-    private $inscritDate; //User.date_of_registration
+    private $inscritDate; //User.date_of_registration date("Y-m-d")
 
     protected static $table = 'user';
     protected static $primary = 'idUser';
-    public function __construct($idUser = NULL, $nom = NULL, $prenom = NULL, $phone = NULL, $birthDate = NULL, $addresse = NULL, $zip = NULL, $email = NULL, $password = NULL, $gender = NULL, $role = NULL, $uStatus = NULL, $cityId = NULL, $inscritDate = NULL)
+    public function __construct($idUser = NULL,  $nom = NULL, $prenom = NULL, $phone = NULL, $birthDate = NULL, $addresse = NULL, $zip = NULL, $email = NULL, $password = NULL, $gender = NULL, $idCity = NULL, $role = NULL, $uStatus = NULL,  $inscritDate = null)
     {
+
+        $this->idUser = $idUser;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->phone = $phone;
+        $this->birthDate = $birthDate;
+        $this->addresse = $addresse;
+        $this->zip = $zip;
+        $this->email = $email;
+        $this->password = $password;
+        $this->gender = $gender;
+        $this->role = $role;
+        $this->uStatus = $uStatus;
+        $this->idCity = $idCity;
+        $this->inscritDate = $inscritDate;
+    }
+
+    public function __toString()
+    {
+        return $this->nom . " " . $this->prenom;
+    }
+
+    public function fetch__email($UniqEmail)
+    {
+        $sql = "SELECT * from " . static::$table . " WHERE email =:email";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->bindParam(":email", $UniqEmail);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
+        if ($req_prep->rowCount() == 0) {
+            return null;
+            die();
+        } else {
+            $rslt = $req_prep->fetch();
+            return $rslt;
+        }
+    }
+    public function fetch__phone($UniqPhone)
+    {
+        $sql = "SELECT * from " . static::$table . " WHERE phone =:phone";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->bindParam(":phone", $UniqPhone);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
+        if ($req_prep->rowCount() == 0) {
+            return null;
+            die();
+        } else {
+            $rslt = $req_prep->fetch();
+            return $rslt;
+        }
+    }
+
+    public function login($email, $pwd)
+    {
+        $sql = "SELECT * from " . static::$table . " WHERE email =:email and Password =:password";
+        $req_prep = Model::$pdo->prepare($sql);
+        $req_prep->bindParam(":email", $email);
+        $req_prep->bindParam(":password", $pwd);
+        $req_prep->execute();
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
+        if ($req_prep->rowCount() == 0) {
+            return null;
+            die();
+        } else {
+            $rslt = $req_prep->fetch();
+            return $rslt;
+        }
     }
 
     /**
@@ -122,9 +190,9 @@ class ModelUser extends Model
     /**
      * Get the value of cityId
      */
-    public function getCityId()
+    public function getIdCity()
     {
-        return $this->cityId;
+        return $this->idCity;
     }
 
     /**
