@@ -58,7 +58,11 @@ if (isset($_REQUEST['controller']) and $_REQUEST['controller'] != 'home') {
         case "admin": {
 
                 if (isset($_REQUEST['action']) and $_REQUEST['action'] != "dashboard") {
+<<<<<<< HEAD
                     if (isset($_REQUEST['task']) and $_REQUEST['task'] == "created" and $_REQUEST['task'] != "updated") {
+=======
+                    if (isset($_REQUEST['task']) and $_REQUEST['task'] == "created") {
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
                     } else {
                         require_once($ROOT . $DS . "view" . $DS . "sideNavbar.php");
                     }

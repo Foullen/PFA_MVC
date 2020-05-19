@@ -72,6 +72,7 @@ switch ($action) {
                             $btnSendValue = "Add";
                             // $tab_c = ModelCity::getAll(); //appel au modèle pour gerer la BD
                             $actionForm = "?index.php&controller=admin&action=users&task=created";
+<<<<<<< HEAD
                             require("{$ROOT}{$DS}view{$DS}view.php");
                         }
                     } // users/task/add - users/task/edit
@@ -132,6 +133,68 @@ switch ($action) {
                             $HTMLbodyId = "";
                             require("{$ROOT}{$DS}view{$DS}view.php");
                         }
+=======
+                            require("{$ROOT}{$DS}view{$DS}view.php");
+                        }
+                    } // users/task/add - users/task/edit
+                    break;
+                case "created": {
+                        if (
+                            isset($_REQUEST['fname']) && isset($_REQUEST['lname'])
+                            && isset($_REQUEST['phone']) && isset($_REQUEST['gender'])
+                            && isset($_REQUEST['BDate']) && isset($_REQUEST['region'])
+                            && isset($_REQUEST['addresse']) && isset($_REQUEST['zip'])
+                            && isset($_REQUEST['email']) && isset($_REQUEST['pwd'])
+                            && isset($_REQUEST['status']) && isset($_REQUEST['role'])
+                        ) {
+                            $idUser = NULL;
+                            $nom = $_REQUEST['lname'];
+                            $prenom = $_REQUEST['fname'];
+                            $phone = $_REQUEST['phone'];
+                            $birthDate = $_REQUEST['BDate'];
+                            $addresse = $_REQUEST['addresse'];
+                            $zip = $_REQUEST['zip'];
+                            $email = $_REQUEST['email'];
+                            $password = $_REQUEST['pwd'];
+                            $gender = $_REQUEST['gender'];
+                            $role = $_REQUEST['role'];
+                            $uStatus = $_REQUEST['status'];
+                            $idCity = $_REQUEST['region'];
+
+                            $inscritDate = date("Y-m-d");
+
+                            // $recherche = ModelUser::findUserByEmail($email);
+
+
+                            $u = new ModelUser($idUser, $nom, $prenom, $phone, $birthDate, $addresse, $zip, $email, $password, $gender, $idCity, $role, $uStatus,  $inscritDate);
+                            $tab = array(
+                                "idUser" => $idUser,
+                                "nom" => $nom,
+                                "prenom" => $prenom,
+                                "phone" => $phone,
+                                "birthDate" => $birthDate,
+                                "addresse" => $addresse,
+                                "zip" => $zip,
+                                "email" => $email,
+                                "password" => $password,
+                                "gender" => $gender,
+                                "idCity" => $idCity,
+                                "role" => $role,
+                                "uStatus" => $uStatus,
+                                "inscritDate" => $inscritDate,
+                            );
+                            $u->insert($tab);
+                            $pagetitle = 'Account Creation';
+                            $view = "created";
+                            $HTMLbodyId = "";
+                            require("{$ROOT}{$DS}view{$DS}view.php");
+                        } else {
+                            $pagetitle = 'Account Creation';
+                            $view = "failedToCreate";
+                            $HTMLbodyId = "";
+                            require("{$ROOT}{$DS}view{$DS}view.php");
+                        }
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
                     } //users/task/created
                     break;
                 case "updated": {
@@ -320,8 +383,12 @@ switch ($action) {
                                 // random string concat with file extention
                                 # The random_bytes() function generates cryptographically secure pseudo-random bytes, 
                                 # which can later be converted to hexadecimal format using bin2hex() function.
+<<<<<<< HEAD
                                 //$fileDestination = "{$ROOT}{$DS}assets{$DS}Images{$DS}product{$DS}" . $fileNewName;
                                 $fileDestination = "assets{$DS}Images{$DS}product{$DS}" . $fileNewName;
+=======
+                                $fileDestination = "{$ROOT}{$DS}assets{$DS}Images{$DS}product{$DS}" . $fileNewName;
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
                                 move_uploaded_file($fileTmpName, $fileDestination);
 
 
@@ -365,6 +432,7 @@ switch ($action) {
                                 require("{$ROOT}{$DS}view{$DS}view.php");
                             }
                         }
+<<<<<<< HEAD
                     } //product/task/created
                     break;
                 case "updated": {
@@ -480,6 +548,30 @@ switch ($action) {
                             }
                         }
                     } //users/task/updated/
+=======
+
+                        // if () {
+
+                        //     // affectation des parametres
+
+                        //     //Creation d'Objet ModelProduct
+
+                        //     // creer la table tab
+
+                        //     //Insertion de produit
+
+                        //     $pagetitle = 'Product Creation';
+                        //     $view = "createdProduct";
+                        //     $HTMLbodyId = "";
+                        //     require("{$ROOT}{$DS}view{$DS}view.php");
+                        // } else {
+                        //     $pagetitle = 'Product Creation';
+                        //     $view = "failedToCreate";
+                        //     $HTMLbodyId = "";
+                        //     require("{$ROOT}{$DS}view{$DS}view.php");
+                        // }
+                    } //users/task/created
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
                     break;
             } //product/task
         } // product

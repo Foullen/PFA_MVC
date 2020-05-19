@@ -39,6 +39,29 @@
                 <td>{$p->getExpDate()}</td>
                 <td>{$p->getIdTheme()}</td>
             </tr>
+<<<<<<< HEAD
+=======
+            <?php
+            foreach ($tab_p as $key => $p) {
+                echo "
+                <tr>
+                <td>
+                    <div class=\"user__action\">
+                        <a href=\"?index.php&controller=admin&action=products&task=detail&id={$p->getIdProduct()}\" class=\"w3-text-green\"><i class=\"fa fa-list\" aria-hidden=\"true\"></i></a>
+                        <a href=\"?index.php&controller=admin&action=products&task=edit&id={$p->getIdProduct()}\" class=\"w3-text-amber\"><i class=\"fas fa-edit \"></i></a>
+                        <a href=\"#\" class=\"w3-text-red\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
+                    </div>
+                </td>
+                <td>{$p->getIdProduct()}</td>
+                <td><img src=\"{$p->getImgSRC()}\" alt=\"contain image product\" class=\"command_item_img\" width=\"40px\"> </td>
+                <td>{$p->getTitle()}</td>
+                <td>{$p->getPrice()} DT</td>
+                <td>{$p->getProvider()}</td>
+                <td>{$p->getManufDate()}</td>
+                <td>{$p->getExpDate()}</td>
+                <td>{$p->getIdTheme()}</td>
+            </tr>
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
                 ";
             }
 

@@ -7,10 +7,14 @@
     <form action="<?= $actionForm ?>" method="post" name="FormPerInfo" class="" enctype="multipart/form-data">
         <div class="inputField adminUserMang__inputs">
             <label for="Ptitle" class="name-field-label">Product Name</label>
+<<<<<<< HEAD
             <?php
             ($task == 'edit') ? $pTitleValue = "value=\"" . $product->getTitle() . "\"" : $pTitleValue = "";
             ?>
             <input type="text" <?= $pTitleValue ?> name="Ptitle" id="Ptitle" class="nameProduct_field field-input" placeholder="e.g Shirt">
+=======
+            <input type="text" name="Ptitle" id="Ptitle" class="nameProduct_field field-input" placeholder="e.g Shirt">
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
         </div>
         <div class="inputField adminUserMang__inputs">
             <input type="file" name="imgFile" id="imgFile" class="img_field field-input">
@@ -31,6 +35,7 @@
         </div>
         <div class="inputField adminUserMang__inputs">
             <label for="price" class="name-field-label">Price</label>
+<<<<<<< HEAD
             <?php
             ($task == 'edit') ? $priceValue = "value=\"" . $product->getPrice() . "\"" : $priceValue = "";
             ?>
@@ -56,6 +61,21 @@
             ($task == 'edit') ? $descriptionValue = "value=\"" . $product->getDescription() . "\"" : $descriptionValue = "";
             ?>
             <input type="text" <?= $descriptionValue ?> name="description" id="description" class="desProduct_field field-input" placeholder="e.g some description of product">
+=======
+            <input type="number" name="price" id="price" class="price field-input" placeholder="e.g 99 $">
+        </div>
+        <div class="inputField adminUserMang__inputs">
+            <label for="stock" class="name-field-label">Stock</label>
+            <input type="number" name="stock" id="stock" class="stock field-input" placeholder="e.g 35 pieces">
+        </div>
+        <div class="inputField adminUserMang__inputs">
+            <label for="provider" class="name-field-label">Provider</label>
+            <input type="text" name="provider" id="provider" class="provider-field field-input" placeholder="e.g assoctiation name/ organisation ...">
+        </div>
+        <div class="inputField adminUserMang__inputs">
+            <label for="description" class="name-field-label">Description </label>
+            <input type="text" name="description" id="description" class="desProduct_field field-input" placeholder="e.g some description of product">
+>>>>>>> 64cfe1443fa19565aa0ada73e878daa7780a45a6
         </div>
         <div class="region_Field adminUserMang__inputs">
             <select class="region_Field" name="theme" id="region_Field">
