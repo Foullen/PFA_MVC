@@ -22,9 +22,15 @@ class Model
         $SQL = "SELECT * FROM " . static::$table;
         $rep = self::$pdo->query($SQL);
         $rep->setFetchMode(
-            PDO::FETCH_CLASS,
+            PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
             'Model' . ucfirst(static::$table)
         );
+        // I added PDO::FETCH_PROPS_LATE to fix a problem occuered
+        // I want constructor to be executed *before* PDO assings the object properties
+        // because smthng weird happen (I guess smthng wrong happen in class mapping by PDO::FETCH_CLASS)
+        //  that I can't use ModelUser's getters in viewAllUsersAdmin, 
+        //  and instead of that  I'used db_column_name eg: $u->Email not $u->getEmail()
+
         return $rep->fetchAll();
     }
     public function select($cle_primaire)
@@ -34,7 +40,7 @@ class Model
         $req_prep->bindParam(":cle_primaire", $cle_primaire);
         $req_prep->execute();
         $req_prep->setFetchMode(
-            PDO::FETCH_CLASS,
+            PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
             'Model' . ucfirst(static::$table)
         );
         if ($req_prep->rowCount() == 0) {
@@ -53,6 +59,25 @@ class Model
     }
     public function update($tab, $cle_primaire)
     {
+        $sql = "UPDATE " . static::$table . " SET";
+        foreach ($tab as $cle => $valeur) {
+            $sql .= " " . $cle . "=:new" . $cle . ",";
+        }
+        $sql = rtrim($sql, ",");
+        $sql .= " WHERE " . static::$primary . "=:oldid;";
+
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array();
+
+        foreach ($tab as $cle => $valeur) {
+            $values[":new" . $cle] = $valeur;
+        }
+
+        $values[":oldid"] = $cle_primaire;
+        $req_prep->execute($values);
+        echo $req_prep->rowCount();
+        $obj = Model::select($tab[static::$primary]);
+        return $obj;
     }
     public function insert($tab)
     {
@@ -62,11 +87,15 @@ class Model
         }
         $sql = rtrim($sql, ",");
         $sql .= ");";
+        echo "<br>" . $sql;
         $req_prep = Model::$pdo->prepare($sql);
         $values = array();
         foreach ($tab as $cle => $valeur)
             $values[":" . $cle] = $valeur;
         $req_prep->execute($values);
+        echo "<br>";
+        print_r($values);
+        echo "<br>" . $req_prep->rowcount();
     }
 }
 Model::Init();
