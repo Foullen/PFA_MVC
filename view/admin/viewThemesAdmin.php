@@ -1,6 +1,6 @@
 <div class="aUserMang_right">
-    <a href="#" class="w3-text-lime"><i class="fa fa-plus-square" aria-hidden="true"></i> ADD THEME</a>
-    <table class="w3-table w3-bordered table_users" id="Users">
+    <a href="?index.php&controller=admin&action=themes&task=add" class="w3-text-lime"><i class="fa fa-plus-square" aria-hidden="true"></i> ADD THEME</a>
+    <table class="w3-table w3-bordered table_users" id="Themes">
         <thead>
             <tr>
                 <th></th>
@@ -10,17 +10,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+
+            <?php
+            foreach ($tab_t as $key => $t) {
+                echo "
+                <tr>
                 <td>
-                    <div class="user__action">
-                        <a href="#" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        <a href="#" class="w3-text-amber"><i class="fas fa-edit "></i></a>
-                        <a href="#" class="w3-text-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <div class=\"user__action\">
+                        <a href=\"?index.php&controller=admin&action=themes&task=edit&id=$t[0]\" class=\"w3-text-amber\"><i class=\"fas fa-edit \"></i></a>
+                        <a href=\"?index.php&controller=admin&action=themes&task=delete&id=$t[0]\" class=\"w3-text-red\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
                     </div>
                 </td>
-                <td>1</td>
-                <td>Food For evry one</td>
-                <td>60</td>
+                <td>" . $t[0] . "</td>
+                <td>" . $t[1] . "</td>
+                <td>0</td>
+            </tr>
+                    ";
+            }
+            ?>
 
         </tbody>
 
@@ -34,10 +41,10 @@
 
 <script>
     $(document).ready(function() {
-        $('#Users').DataTable({
-            scrollY: '50vh',
-            scrollCollapse: true,
-            paging: false,
+        $('#Themes').DataTable({
+            // scrollY: '50vh',
+            // scrollCollapse: true,
+            // paging: false,
             order: [
                 [1, 'asc']
             ],

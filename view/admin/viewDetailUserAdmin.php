@@ -2,21 +2,23 @@
     <main>
         <section class="adUserDetailsBox">
             <div>
-                <h4 class="AdAccountInfotitle">First Name: <span class="accountInfoData">Foullen</span></h4>
-                <h4 class="AdAccountInfotitle">Last Name: <span class="accountInfoData">Foulleni</span></h4>
-                <h4 class="AdAccountInfotitle">Email: <span class="accountInfoData">Foullen@gmail.com</span></h4>
-                <h4 class="AdAccountInfotitle">Phone: <span class="accountInfoData">22 050 987</span></h4>
-                <h4 class="AdAccountInfotitle">Birth Date: <span class="accountInfoData">26/05/1999</span></h4>
-                <h4 class="AdAccountInfotitle">Gender: <span class="accountInfoData">Male</span></h4>
+                <h4 class="AdAccountInfotitle">First Name: <span class="accountInfoData"><?= $user->Prenom ?></span></h4>
+                <h4 class="AdAccountInfotitle">Last Name: <span class="accountInfoData"><?= $user->Nom ?></span></h4>
+                <h4 class="AdAccountInfotitle">Email: <span class="accountInfoData"><?= $user->Email ?></span></h4>
+                <h4 class="AdAccountInfotitle">Phone: <span class="accountInfoData"><?= $user->Phone ?></span></h4>
+                <h4 class="AdAccountInfotitle">Birth Date: <span class="accountInfoData"><?= $user->BirthDate ?></span></h4>
+                <h4 class="AdAccountInfotitle">Gender: <span class="accountInfoData"><?= $user->Gender ?></span></h4>
             </div>
             <div>
-                <h4 class="AdAccountInfotitle">Address: <span class="accountInfoData">70 rue de Turkey</span></h4>
-                <h4 class="AdAccountInfotitle">ZIP: <span class="accountInfoData">2040</span></h4>
-                <h4 class="AdAccountInfotitle">City: <span class="accountInfoData">Manouba</span></h4>
+                <h4 class="AdAccountInfotitle">Address: <span class="accountInfoData"><?= $user->Adresse ?></span></h4>
+                <h4 class="AdAccountInfotitle">ZIP: <span class="accountInfoData"><?= $user->ZIP ?></span></h4>
+                <h4 class="AdAccountInfotitle">City: <span class="accountInfoData"><?= $city->getNameCity()  ?></span></h4>
                 <h4 class="AdAccountInfotitle">Status:
-                    <span class="accountInfoData w3-text-green"> Active</span>
+                    <?= $user->getUStatus() == 1 ? "<span class=\"accountInfoData w3-text-green\"> Active</span>" : "<span class=\"accountInfoData w3-text-red\"> Desactive</span>" ?>
+
                 </h4>
-                <h4 class="AdAccountInfotitle">Role: <span class="accountInfoData">Male</span></h4>
+                <h4 class="AdAccountInfotitle">Role: <span class="accountInfoData"><?= $user->Role == 1 ? "Admin" : "Client" ?></span></h4>
+                <h4 class="AdAccountInfotitle">Date of Regestration: <span class="accountInfoData"><?= $user->getInscritDate() ?></span></h4>
             </div>
         </section>
 

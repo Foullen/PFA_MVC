@@ -3,12 +3,14 @@ require_once("Model.php");
 class ModelTheme extends Model
 {
     private $idTheme;
-    private $name;
+    private $tName;
 
-    protected static $table = 'Themes';
+    protected static $table = 'themes';
     protected static $primary = 'idTheme';
-    public function __construct($idTheme = NULL, $name = NULL)
+    public function __construct($idTheme = NULL, $tName = NULL)
     {
+        $this->idTheme = $idTheme;
+        $this->tName = $tName;
     }
 
     /**
@@ -20,10 +22,15 @@ class ModelTheme extends Model
     }
 
     /**
-     * Get the value of name
+     * Get the value of tName
      */
-    public function getName()
+    public function getTName()
     {
-        return $this->name;
+        return $this->tName;
+    }
+
+    public function __toString()
+    {
+        return $this->idTheme . " " . $this->tName;
     }
 }

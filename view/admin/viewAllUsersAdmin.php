@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <!-- <tr>
                 <td>
                     <div class="user__action">
                         <a href="?index.php&controller=admin&action=users&task=detail&id=1" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
@@ -61,7 +61,49 @@
                         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                     </a>
                 </td>
+            </tr> -->
+
+            <?php
+            foreach ($tab_u as $key => $u) {
+
+                if ($u->getUStatus() == 1) {
+                    $Statusthumb = "<i class=\"fa fa-thumbs-up w3-text-green\" aria-hidden=\"true\"></i>";
+                } else {
+                    $Statusthumb = "<i class=\"fa fa-thumbs-down w3-text-red\" aria-hidden=\"true\"></i>";
+                }
+
+                if ($u->Role == 1) {
+                    $RoleTxt = "Admin";
+                } else {
+                    $RoleTxt = "Client";
+                }
+
+                echo "
+                <tr>
+                <td>
+                    <div class=\"user__action\">
+                        <a href=\"?index.php&controller=admin&action=users&task=detail&id={$u->getIdUser()}\" class=\"w3-text-green\"><i class=\"fa fa-list\" aria-hidden=\"true\"></i></a>
+                        <a href=\"?index.php&controller=admin&action=users&task=edit&id={$u->getIdUser()}\" class=\"w3-text-amber\"><i class=\"fas fa-edit \"></i></a>
+                        <a href=\"?index.php&controller=admin&action=users&task=delete&id={$u->getIdUser()}\" class=\"w3-text-red\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
+                    </div>
+                </td>
+                <td>" . $u->getIdUser() . "</td>
+                <td>" . $u->Prenom . " " . $u->Nom . "</td>
+                <td>" . $u->Email . "</td>
+                <td>" . $u->Phone . "</td>
+                <td>" . $u->getIdCity() . "</td>
+                <td>" . $u->Gender . "</td>
+                <td>" . $u->BirthDate . "</td>
+                <td>" . $RoleTxt . "</td>
+                <td class=\"w3-text-red w3-center\">
+                    <a href=\"#\">
+                        " . $Statusthumb . "
+                    </a>
+                </td>
             </tr>
+                    ";
+            }
+            ?>
 
         </tbody>
 

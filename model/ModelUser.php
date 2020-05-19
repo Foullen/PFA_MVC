@@ -19,7 +19,7 @@ class ModelUser extends Model
 
     protected static $table = 'user';
     protected static $primary = 'idUser';
-    public function __construct($idUser = NULL,  $nom = NULL, $prenom = NULL, $phone = NULL, $birthDate = NULL, $addresse = NULL, $zip = NULL, $email = NULL, $password = NULL, $gender = NULL, $idCity = NULL, $role = NULL, $uStatus = NULL,  $inscritDate = null)
+    public function __construct($idUser = NULL,  $nom = NULL, $prenom = NULL, $phone = NULL, $birthDate = NULL, $addresse = NULL, $zip = NULL, $email = NULL, $password = NULL, $gender = NULL, $idCity = NULL,  $uStatus = NULL, $role = NULL,  $inscritDate = null)
     {
 
         $this->idUser = $idUser;
@@ -43,7 +43,7 @@ class ModelUser extends Model
         return $this->nom . " " . $this->prenom;
     }
 
-    public function fetch__email($UniqEmail)
+    public function findUserByEmail($UniqEmail)
     {
         $sql = "SELECT * from " . static::$table . " WHERE email =:email";
         $req_prep = Model::$pdo->prepare($sql);
@@ -58,21 +58,21 @@ class ModelUser extends Model
             return $rslt;
         }
     }
-    public function fetch__phone($UniqPhone)
-    {
-        $sql = "SELECT * from " . static::$table . " WHERE phone =:phone";
-        $req_prep = Model::$pdo->prepare($sql);
-        $req_prep->bindParam(":phone", $UniqPhone);
-        $req_prep->execute();
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
-        if ($req_prep->rowCount() == 0) {
-            return null;
-            die();
-        } else {
-            $rslt = $req_prep->fetch();
-            return $rslt;
-        }
-    }
+    // public function fetch__phone($UniqPhone)
+    // {
+    //     $sql = "SELECT * from " . static::$table . " WHERE phone =:phone";
+    //     $req_prep = Model::$pdo->prepare($sql);
+    //     $req_prep->bindParam(":phone", $UniqPhone);
+    //     $req_prep->execute();
+    //     $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
+    //     if ($req_prep->rowCount() == 0) {
+    //         return null;
+    //         die();
+    //     } else {
+    //         $rslt = $req_prep->fetch();
+    //         return $rslt;
+    //     }
+    // }
 
     public function login($email, $pwd)
     {
@@ -89,6 +89,14 @@ class ModelUser extends Model
             $rslt = $req_prep->fetch();
             return $rslt;
         }
+    }
+
+    /**
+     * Custum Getter of fullname
+     */
+    public function getFullName()
+    {
+        return $this->prenom . " " . $this->nom;
     }
 
     /**
@@ -201,5 +209,17 @@ class ModelUser extends Model
     public function getInscritDate()
     {
         return $this->inscritDate;
+    }
+
+    /**
+     * Set the value of idCity
+     *
+     * @return  self
+     */
+    public function setIdCity($idCity)
+    {
+        $this->idCity = $idCity;
+
+        return $this;
     }
 }

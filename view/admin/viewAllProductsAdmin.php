@@ -1,7 +1,7 @@
 <div class="aUserMang_right">
     <!-- <button id="btnAdd"><i class="fa fa-plus-circle" aria-hidden="true"></i>
         </button> -->
-    <a href="#" class="w3-text-lime"><i class="fa fa-plus-square" aria-hidden="true"></i> ADD PRODUCT</a>
+    <a href="?index.php&controller=admin&action=products&task=add" class="w3-text-lime"><i class="fa fa-plus-square" aria-hidden="true"></i> ADD PRODUCT</a>
     <table class="w3-table w3-bordered table_users" id="Users">
         <thead>
             <tr>
@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Image</th>
                 <th>Title</th>
+                <th>Stock</th>
                 <th>Price</th>
                 <th>Provider</th>
                 <th>Manu. Date</th>
@@ -17,40 +18,31 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
+            <?php
+            foreach ($tab_p as $key => $p) {
+                echo "
+                <tr>
                 <td>
-                    <div class="user__action">
-                        <a href="#" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        <a href="#" class="w3-text-amber"><i class="fas fa-edit "></i></a>
-                        <a href="#" class="w3-text-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <div class=\"user__action\">
+                        <a href=\"?index.php&controller=admin&action=products&task=detail&id={$p->getIdProduct()}\" class=\"w3-text-green\"><i class=\"fa fa-list\" aria-hidden=\"true\"></i></a>
+                        <a href=\"?index.php&controller=admin&action=products&task=edit&id={$p->getIdProduct()}\" class=\"w3-text-amber\"><i class=\"fas fa-edit \"></i></a>
+                        <a href=\"#\" class=\"w3-text-red\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>
                     </div>
                 </td>
-                <td>1</td>
-                <td><img src="assets/Images/product/Product_Tshirt_2.png" alt="contain image product" class="command_item_img" width="40px"> </td>
-                <td>T-Shirt 2</td>
-                <td>99.9 DT</td>
-                <td>Food For Every One</td>
-                <td>31/12/2019</td>
-                <td>31/12/2020</td>
-                <td>FOOD</td>
+                <td>{$p->getIdProduct()}</td>
+                <td><img src=\"{$p->getImgSRC()}\" alt=\"contain image product\" class=\"command_item_img\" width=\"40px\"> </td>
+                <td>{$p->getTitle()}</td>
+                <td>{$p->getStock()}</td>
+                <td>{$p->getPrice()} DT</td>
+                <td>{$p->getProvider()}</td>
+                <td>{$p->getManufDate()}</td>
+                <td>{$p->getExpDate()}</td>
+                <td>{$p->getIdTheme()}</td>
             </tr>
-            <tr>
-                <td>
-                    <div class="user__action">
-                        <a href="#" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        <a href="#" class="w3-text-amber"><i class="fas fa-edit "></i></a>
-                        <a href="#" class="w3-text-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </div>
-                </td>
-                <td>1</td>
-                <td><img src="assets/Images/product/Product_Tshirt_2.png" alt="contain image product" class="command_item_img" width="40px"> </td>
-                <td>T-Shirt 2</td>
-                <td>99.9 DT</td>
-                <td>Food For Every One</td>
-                <td>31/12/2019</td>
-                <td>31/12/2020</td>
-                <td>FOOD</td>
-            </tr>
+                ";
+            }
+
+            ?>
         </tbody>
 
     </table>
