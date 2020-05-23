@@ -81,7 +81,7 @@ class ModelUser extends Model
         $req_prep->bindParam(":email", $email);
         $req_prep->bindParam(":password", $pwd);
         $req_prep->execute();
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Model' . ucfirst(static::$table));
+        $req_prep->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Model' . ucfirst(static::$table));
         if ($req_prep->rowCount() == 0) {
             return null;
             die();

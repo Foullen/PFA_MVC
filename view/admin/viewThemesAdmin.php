@@ -6,7 +6,6 @@
                 <th></th>
                 <th>Id</th>
                 <th>Title</th>
-                <th>Quantities sells</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +22,6 @@
                 </td>
                 <td>" . $t[0] . "</td>
                 <td>" . $t[1] . "</td>
-                <td>0</td>
             </tr>
                     ";
             }
@@ -51,7 +49,6 @@
             columns: [{
                     "width": "4em"
                 },
-                null,
                 null,
                 null
             ]

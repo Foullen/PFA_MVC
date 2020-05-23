@@ -33,6 +33,7 @@ class Model
 
         return $rep->fetchAll();
     }
+
     public function select($cle_primaire)
     {
         $sql = "SELECT * from " . static::$table . " WHERE " . static::$primary . "=:cle_primaire";
@@ -92,10 +93,34 @@ class Model
         $values = array();
         foreach ($tab as $cle => $valeur)
             $values[":" . $cle] = $valeur;
+
+        try {
+            Model::$pdo->beginTransaction();
+            $req_prep->execute($values);
+            Model::$pdo->commit();
+        } catch (PDOExecption $e) {
+            Model::$pdo->rollback();
+        }
+        // echo "<br>";
+        // print_r($values);
+        // echo "<br>" . $req_prep->rowcount();
+    }
+    public function insertAndGetLastId($tab)
+    {
+        $sql = "INSERT INTO " . static::$table . " VALUES(";
+        foreach ($tab as $cle => $valeur) {
+            $sql .= " :" . $cle . ",";
+        }
+        $sql = rtrim($sql, ",");
+        $sql .= ");";
+        echo "<br>" . $sql;
+        $req_prep = Model::$pdo->prepare($sql);
+        $values = array();
+        foreach ($tab as $cle => $valeur)
+            $values[":" . $cle] = $valeur;
         $req_prep->execute($values);
-        echo "<br>";
-        print_r($values);
-        echo "<br>" . $req_prep->rowcount();
+        $last_id = $req_prep->lastInsertId();
+        return $last_id;
     }
 }
 Model::Init();

@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION['userId']) or $_SESSION['userId'] == 2) {
+    header('Location: ?index.php');
+}
 require_once("{$ROOT}{$DS}model{$DS}ModelUser.php"); // chargement du modèle User
 require_once("{$ROOT}{$DS}model{$DS}ModelCity.php"); // chargement du modèle City
 require_once("{$ROOT}{$DS}model{$DS}ModelTheme.php"); // chargement du modèle Theme
@@ -20,6 +23,13 @@ switch ($action) {
             $HTMLbodyId = "admin__dash";
             require("{$ROOT}{$DS}view{$DS}view.php");
         } //dashboard
+        break;
+    case "logout": {
+            session_start();
+            session_unset();
+            session_destroy();
+            header('location: ?index.php&controller=client&action=login');
+        }
         break;
     case "users": {
             // require("{$ROOT}{$DS}controller{$DS}controllerMangUsers.php");
@@ -201,7 +211,7 @@ switch ($action) {
                         $id = $_REQUEST['id'];
                         $del = ModelUser::select($id);
                         if ($del != null) {
-                            //$del->delete($id);
+                            $del->delete($id);
                             header('Location: ?index.php&controller=admin&action=users');
                         }
                     }

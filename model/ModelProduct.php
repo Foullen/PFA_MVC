@@ -29,6 +29,24 @@ class ModelProduct extends Model
         $this->idTheme = $idTheme;
     }
 
+    // Surcharge de la methode Model::getAll() doesn't work for me
+    // it show me an warning
+    // eg. warning: Declaration of ModelProduct::getAll($params) should be compatible with Model::getAll()
+    public function selectAll($params)
+    {
+        $SQL = "SELECT * FROM " . static::$table;
+        if ($params != null) {
+            $SQL .= " WHERE idTheme=" . $params;
+        }
+        $rep = self::$pdo->query($SQL);
+        $rep->setFetchMode(
+            PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
+            'Model' . ucfirst(static::$table)
+        );
+
+        return $rep->fetchAll();
+    }
+
     /**
      * Get the value of idProduct
      */

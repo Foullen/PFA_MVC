@@ -1,3 +1,4 @@
+<!-- See viewJoinClient.php -->
 <a href="../index.html" class="logo__link"><img src="./assets/Images/WhiteLogo.png" alt="" class="white_logo"></a>
 <div class="joinLeft_side">
 

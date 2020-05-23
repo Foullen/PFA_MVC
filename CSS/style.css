@@ -719,11 +719,16 @@
 .cart_item_footer {
     display: flex;
     justify-content: space-between;
+    padding-left: .5em;
 }
 
 .cart_item_descrip {
     padding: .4em .5em 0 .5em;
-    margin: .5em;
+    width: 17rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
     /* font-size: 10px; */
 }
 

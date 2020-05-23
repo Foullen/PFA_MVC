@@ -1,3 +1,4 @@
+<!-- See viewLoginClient.php -->
 <div class="Login__container">
     <a href="/pfa/"> <img src="./assets/Images/logo.png" alt="" class="logo_site"></a>
 

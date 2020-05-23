@@ -4,8 +4,8 @@ class ModelCommand extends Model
 {
     private $idCommand; //Command.idCommand
     private $idUser; //Command.idUser
-    private $commandDate; //Command.Date_of_
-    private $LivredDate; //Command.Date_of_
+    private $CommandDate; //Command.Date_of_command
+    private $LivredDate; //Command.Date_of_shipment
     private $status; //Command.status
     private $state; //Command.state
     private $payMethode; //Command.Methode_de_payment
@@ -13,8 +13,15 @@ class ModelCommand extends Model
 
     protected static $table = 'command';
     protected static $primary = 'idCommand';
-    public function __construct($idCommand = NULL, $idUser = NULL, $commandDate = NULL, $LivredDate = NULL, $status = NULL, $state = NULL, $payMethode = NULL)
+    public function __construct($idCommand = NULL, $idUser = NULL, $CommandDate = NULL, $LivredDate = NULL, $status = NULL, $state = NULL, $payMethode = NULL)
     {
+        $this->idCommand = $idCommand;
+        $this->idUser = $idUser;
+        $this->CommandDate = $CommandDate;
+        $this->LivredDate = $LivredDate;
+        $this->status = $status;
+        $this->state = $state;
+        $this->payMethode = $payMethode;
     }
 
     /**
@@ -34,11 +41,11 @@ class ModelCommand extends Model
     }
 
     /**
-     * Get the value of commandDate
+     * Get the value of CommandDate
      */
     public function getCommandDate()
     {
-        return $this->commandDate;
+        return $this->CommandDate;
     }
 
     /**

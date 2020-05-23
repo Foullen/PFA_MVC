@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_REQUEST['controller']) and $_REQUEST['controller'] != 'home') {
     $HTMLheaderClass .= "header nav-scrolled mobile_scroll";
     $HTMLimgSRC = "assets/Images/logo.png";
@@ -28,10 +27,19 @@ if (isset($_REQUEST['controller']) and $_REQUEST['controller'] != 'home') {
         <aside class="authenticate">
             <ul class="nav__list">
                 <li class="nav__list-item"><a href="/pfa/?controller=client&action=cart" class="nav__link auth-user">My Cart</a></li>
-                <li class="nav__list-item"><a href="/pfa/?controller=client" class="nav__link auth-user">My Account</a></li>
-                <li class="nav__list-item"><a href="index/client/login/" class="nav__link nav__link--btn">Login</a>
-                </li>
-                <li class="nav__list-item"><a href="index/client/join/" class="nav__link nav__link--btn nav__link--btn--highlight ">Join</a></li>
+                <?php
+                if (isset($_SESSION['userId'])) {
+                    echo '<li class="nav__list-item"><a href="/pfa/?controller=client" class="nav__link auth-user">My Account</a></li>
+                    <li class="nav__list-item"><a href="?index.php&controller=client&action=logout" class="nav__link auth-user">log out</a></li>
+                    ';
+                } else {
+                    echo '<li class="nav__list-item"><a href="index/client/login/" class="nav__link nav__link--btn">Login</a>
+                    </li>
+                    <li class="nav__list-item"><a href="index/client/join/" class="nav__link nav__link--btn nav__link--btn--highlight ">Join</a></li>
+                ';
+                }
+
+                ?>
             </ul>
         </aside>
     </div>

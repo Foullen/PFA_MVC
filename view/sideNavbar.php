@@ -25,6 +25,6 @@
         </li>
     </ul>
 
-    <a href="#" class="adminSideNav_link"><i class="fas fa-sign-out-alt    "></i></a>
+    <a href="?index.php&controller=admin&action=logout" class="adminSideNav_link"><i class="fas fa-sign-out-alt    "></i></a>
 
 </nav>

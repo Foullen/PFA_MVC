@@ -1,3 +1,15 @@
+<?php
+// session_start();
+// if (isset($_SESSION['userId'])) {
+//     if ($_SESSION['role'] == 1) {
+//         echo "Login as Admin";
+//     } else {
+//         echo "Login as client";
+//     }
+// } else {
+//     echo "no session variable";
+// }
+?>
 <section class="hero">
     <div class="nav-trigger"></div>
     <div class="inner">

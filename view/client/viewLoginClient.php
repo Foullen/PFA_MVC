@@ -5,7 +5,7 @@
 
         <h2 class="login__title">Sign in to Account</h2>
         <span class="login-bar"></span>
-        <form action="#" method="GET" class="login__form">
+        <form action="?index.php&controller=client&action=afterlogin" method="POST" class="login__form">
             <div class="email-div">
                 <label for="login__email" class="email-input-label">Email</label>
                 <input type="email" name="email" id="login__email" class="login__email">
@@ -14,10 +14,10 @@
                 <label for="login__pwd" class="pwd-input-label">Password</label>
                 <input type="password" name="pwd" id="login__pwd" class="login__pwd" autocomplete="off">
             </div>
-            <div class="check-div">
+            <!-- <div class="check-div">
                 <input type="checkbox" name="check" id="login__check" class="login__check">
                 <label for="login__check" class="check-input-label">Remeber me</label>
-            </div>
+            </div> -->
             <div class="login-btn-div">
                 <input class="signin-btn" type="submit" value="LogIn">
             </div>

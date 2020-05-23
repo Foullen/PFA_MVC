@@ -1,7 +1,10 @@
 <?php
+// session_start();
+
 //$controller = "user";
 require_once("{$ROOT}{$DS}model{$DS}ModelUser.php"); // chargement du modèle
 require_once("{$ROOT}{$DS}model{$DS}ModelCity.php"); // chargement du modèle
+require_once("{$ROOT}{$DS}model{$DS}ModelProduct.php"); // chargement du modèle
 
 if (isset($_REQUEST['action'])) {
     /* recupère l'action passée dans l'URL*/
@@ -13,7 +16,14 @@ if (isset($_REQUEST['action'])) {
 
 switch ($action) {
     case "account": {
-            $id = $_REQUEST['id']; // it will be changed for session 'id'
+            if (isset($_SESSION['userId'])) {
+                if ($_SESSION['userId'] == 1) {
+                    header('Location: ?index.php&controller=admin');
+                }
+            } else {
+                header('Location: ?index.php');
+            }
+            $id = $_SESSION['userId']; // it will be changed for session 'id'
             $pagetitle = "My Account | Fundly";
             $view = "account";
             $HTMLbodyId = "AccountPage";
@@ -22,10 +32,29 @@ switch ($action) {
         }
         break;
     case "cart": {
+            // session_start();
             $pagetitle = 'Cart | Fundly';
             $view = "cart";
             $HTMLbodyId = "CartPage";
+            $cartList = array();
+            // session_start();
+            foreach (array_count_values($_SESSION['panier']) as $idProduct => $qte) {
+                $p = ModelProduct::select($idProduct);
+                array_push($cartList, $p);
+            }
             require("{$ROOT}{$DS}view{$DS}view.php");
+        }
+        break;
+    case "removecartitem": {
+            // session_start();
+
+            if (isset($_REQUEST['idproduct'])) {
+                $IdProductKey = array_search($_REQUEST['idproduct'], $_SESSION['panier']);
+                if ($IdProductKey !== false) {
+                    unset($_SESSION['panier'][$IdProductKey]);
+                    header('Location: ?index.php&controller=client&action=cart');
+                }
+            }
         }
         break;
     case "command": {
@@ -103,7 +132,7 @@ switch ($action) {
                 $HTMLbodyId = "accountCreation";
                 require("{$ROOT}{$DS}view{$DS}view.php");
             } else {
-                $msg = "Email existe deja";
+                $msg = "Verify your email, please!";
                 $pagetitle = 'Account Failed to Create';
                 $view = "failToCreate";
                 $HTMLbodyId = "accountCreation";
@@ -136,22 +165,38 @@ switch ($action) {
                 $email = $_REQUEST["email"];
                 $pwd = $_REQUEST["pwd"];
 
+                // $pwd = MD5($_REQUEST["pwd"]);
+
                 $recherche = ModelUser::login($email, $pwd);
 
-                if ($recherche == null) {
-                    $msg = "login avec success";
-                    $pagetitle = 'Account Creation';
-                    $view = "created";
-                    $HTMLbodyId = "accountCreation";
-                    require("{$ROOT}{$DS}view{$DS}view.php");
+                print_r($recherche);
+
+                if ($recherche != null) {
+                    session_start();
+                    $_SESSION['userId'] = $recherche->getIdUser();
+                    $_SESSION['role'] = $recherche->Role;
+                    // $_SESSION['panier'] = array();
+                    header("Location: ?index.php&controller=client&id={$recherche->getIdUser()}");
+                    // $msg = "login avec success";
+                    // $pagetitle = 'Account Creation';
+                    // $view = "created";
+                    // $HTMLbodyId = "accountCreation";
+                    // require("{$ROOT}{$DS}view{$DS}view.php");
                 } else {
-                    $msg = "Email existe deja";
-                    $pagetitle = 'Account Failed to Create';
-                    $view = "failToCreate";
+                    $msg = "Something Wrong ...";
+                    $pagetitle = 'Account Failed to login';
+                    $view = "failToCreate"; // redirect me to this view to display $msg
                     $HTMLbodyId = "accountCreation";
                     require("{$ROOT}{$DS}view{$DS}view.php");
                 }
             }
+        }
+        break;
+    case "logout": {
+            session_start();
+            session_unset();
+            session_destroy();
+            header('location: ?index.php&controller=client&action=login');
         }
         break;
     case "updated": {

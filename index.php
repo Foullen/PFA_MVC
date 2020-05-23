@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!array_key_exists('panier', $_SESSION)) {
+    $_SESSION['panier'] = array();
+}
 /* __DIR__ est une constante "magique" de PHP qui contient le
 chemin du dossier courant */
 $ROOT = __DIR__;

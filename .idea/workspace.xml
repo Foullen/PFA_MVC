@@ -2,21 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e59fdef3-878d-4b09-b46f-d7900fccfb2c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSS/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Images/product/f78a36abd2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Images/product/f8440c94ad.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/controllerAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controllerAdmin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/controllerClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controllerClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/controllerHome.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controllerHome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/controllerProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controllerProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/ModelTheme.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ModelTheme.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/ModelProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ModelProduct.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/ModelUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/ModelUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/admin/viewAllUsersAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/viewAllUsersAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/admin/viewDetailUserAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/viewDetailUserAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/admin/viewInputUserAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/viewInputUserAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/viewDashboardAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/viewDashboardAdmin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/admin/viewThemesAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/viewThemesAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/client/viewAccountClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/client/viewAccountClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/client/viewEditClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/client/viewEditClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/client/viewCartClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/client/viewCartClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/client/viewFailToCreateClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/client/viewFailToCreateClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/client/viewLoginClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/client/viewLoginClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/home/viewPageHome.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/home/viewPageHome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/login/viewPageLogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/login/viewPageLogin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/product/viewReadAllProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/product/viewReadAllProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/product/viewReadProduct.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/product/viewReadProduct.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/sideNavbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/sideNavbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/signup/viewPageSignup.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/signup/viewPageSignup.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +101,7 @@
       <workItem from="1588982893852" duration="964000" />
       <workItem from="1588983981707" duration="237000" />
       <workItem from="1589674458094" duration="613000" />
+      <workItem from="1590210982791" duration="677000" />
     </task>
     <servers />
   </component>
@@ -104,7 +113,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
