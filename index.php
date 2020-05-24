@@ -16,12 +16,9 @@ else
     // $controller recupère le contrôleur passé dans l'URL
     $controller = $_REQUEST['controller'];
 switch (strtolower($controller)) {
-        // case "voiture":
-        //     require("{$ROOT}{$DS}controller{$DS}controllerVoiture.php");
-        //     break;
-        // case "utilisateur":
-        //     require("{$ROOT}{$DS}controller{$DS}controllerUtilisateur.php");
-        //     break;
+    case "command":
+        require("{$ROOT}{$DS}controller{$DS}controllerCommand.php");
+        break;
     case "home":
         require("{$ROOT}{$DS}controller{$DS}controllerHome.php");
         break;

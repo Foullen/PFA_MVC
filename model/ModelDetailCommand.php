@@ -8,11 +8,15 @@ class ModelDetailCommand extends Model
     private $Remise;
 
     protected static $table = 'detailcommand';
-    protected static $primary1 = 'idCommand';
+    protected static $primary = 'idCommand';
     protected static $primary2 = 'idProduct';
 
     public function __construct($idCommand = NULL, $idProduct = NULL, $Quantity = NULL, $Remise = NULL)
     {
+        $this->idCommand = $idCommand;
+        $this->idProduct = $idProduct;
+        $this->Quantity = $Quantity;
+        $this->Remise = $Remise;
     }
 
     /**

@@ -18,50 +18,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- <tr>
-                <td>
-                    <div class="user__action">
-                        <a href="?index.php&controller=admin&action=users&task=detail&id=1" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        <a href="?index.php&controller=admin&action=users&task=edit&id=1" class="w3-text-amber"><i class="fas fa-edit "></i></a>
-                        <a href="#" class="w3-text-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </div>
-                </td>
-                <td>1</td>
-                <td>Foullen Foulleni</td>
-                <td>Foullen@gmail.com</td>
-                <td>22 050 987</td>
-                <td>Manouba</td>
-                <td>Male</td>
-                <td>26/05/1999</td>
-                <td>user</td>
-                <td class="w3-text-green w3-center">
-                    <a href="#">
-                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="user__action">
-                        <a href="#" class="w3-text-green"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        <a href="#" class="w3-text-amber"><i class="fas fa-edit "></i></a>
-                        <a href="#" class="w3-text-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </div>
-                </td>
-                <td>1</td>
-                <td>Flen Foulleni</td>
-                <td>FLen007@live.com</td>
-                <td>99 050 987</td>
-                <td>Tunis</td>
-                <td>Male</td>
-                <td>05/05/2000</td>
-                <td>user</td>
-                <td class="w3-text-red w3-center">
-                    <a href="#">
-                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                    </a>
-                </td>
-            </tr> -->
 
             <?php
             foreach ($tab_u as $key => $u) {

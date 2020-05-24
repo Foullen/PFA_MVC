@@ -5,6 +5,9 @@
 require_once("{$ROOT}{$DS}model{$DS}ModelUser.php"); // chargement du modèle
 require_once("{$ROOT}{$DS}model{$DS}ModelCity.php"); // chargement du modèle
 require_once("{$ROOT}{$DS}model{$DS}ModelProduct.php"); // chargement du modèle
+require_once("{$ROOT}{$DS}model{$DS}ModelCommand.php"); // chargement du modèle Command
+require_once("{$ROOT}{$DS}model{$DS}ModelDetailCommand.php"); // chargement du modèle detailCommand
+
 
 if (isset($_REQUEST['action'])) {
     /* recupère l'action passée dans l'URL*/
@@ -58,10 +61,13 @@ switch ($action) {
         }
         break;
     case "command": {
-            $pagetitle = 'Cart | Fundly';
-            $view = "command";
-            $HTMLbodyId = "CommandPage";
-            require("{$ROOT}{$DS}view{$DS}view.php");
+            if (isset($_SESSION['userId'])) {
+                $pagetitle = 'My Command | Fundly';
+                $view = "command";
+                $HTMLbodyId = "CommandPage";
+                $tab_com = ModelCommand::getAllByColumn("idUser", $_SESSION['userId']);
+                require("{$ROOT}{$DS}view{$DS}view.php");
+            }
         }
         break;
     case "edit": {

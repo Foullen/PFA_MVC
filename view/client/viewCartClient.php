@@ -18,7 +18,26 @@ session_start();
         </div>
         <?php
         if ($total > 0) {
-            echo '<a href="#" class="buyAll_cart">Buy all</a>';
+            echo '<button  onclick="document.getElementById(\'paymentModal\').style.display=\'block\'" class="buyAll_cart w3-hover-shadow">Buy all</button>';
+            echo '
+            <div id="paymentModal" class="w3-modal">
+            <div class="w3-modal-content w3-card-4">
+              <header class="w3-container w3-teal"> 
+                <span onclick="document.getElementById(\'paymentModal\').style.display=\'none\'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Paiement Methode</h2>
+              </header>
+              <div class="w3-container"style=" display: flex; height: 300px; align-items: center; justify-content: space-between;">
+                <a href="?controller=command&action=add&paymentMethode=2" style="display: flex; flex-direction: column; align-items: center;text-decoration: none;"><img src="assets/images/credit_card.png"/><p>Payment by card</p></a>
+                <a href="?controller=command&action=add&paymentMethode=1" style="display: flex; flex-direction: column; align-items: center;text-decoration: none;"><img src="assets/images/delivery.png"/><p>Cash on delivery</p></a>
+              </div>
+              <footer class="w3-container w3-teal">
+                <p></p>
+              </footer>
+            </div>
+          </div>
+        </div>
+            ';
         }
         ?>
 
@@ -61,3 +80,14 @@ session_start();
     }
     ?>
 </div>
+<script>
+    // Get the modal
+    var modal = document.getElementById('paymentModal');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

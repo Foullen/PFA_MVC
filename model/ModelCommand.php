@@ -5,22 +5,22 @@ class ModelCommand extends Model
     private $idCommand; //Command.idCommand
     private $idUser; //Command.idUser
     private $CommandDate; //Command.Date_of_command
-    private $LivredDate; //Command.Date_of_shipment
-    private $status; //Command.status
-    private $state; //Command.state
+    private $LiveredDate; //Command.Date_of_shipment
+    private $Status; //Command.status
+    private $State; //Command.state
     private $payMethode; //Command.Methode_de_payment
 
 
     protected static $table = 'command';
     protected static $primary = 'idCommand';
-    public function __construct($idCommand = NULL, $idUser = NULL, $CommandDate = NULL, $LivredDate = NULL, $status = NULL, $state = NULL, $payMethode = NULL)
+    public function __construct($idCommand = NULL, $idUser = NULL, $CommandDate = NULL, $LiveredDate = NULL, $Status = NULL, $State = NULL, $payMethode = NULL)
     {
         $this->idCommand = $idCommand;
         $this->idUser = $idUser;
         $this->CommandDate = $CommandDate;
-        $this->LivredDate = $LivredDate;
-        $this->status = $status;
-        $this->state = $state;
+        $this->LiveredDate = $LiveredDate;
+        $this->Status = $Status;
+        $this->State = $State;
         $this->payMethode = $payMethode;
     }
 
@@ -49,28 +49,13 @@ class ModelCommand extends Model
     }
 
     /**
-     * Get the value of LivredDate
+     * Get the value of LiveredDate
      */
-    public function getLivredDate()
+    public function getLiveredDate()
     {
-        return $this->LivredDate;
+        return $this->LiveredDate;
     }
 
-    /**
-     * Get the value of status
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Get the value of state
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
 
     /**
      * Get the value of payMethode
@@ -78,5 +63,21 @@ class ModelCommand extends Model
     public function getPayMethode()
     {
         return $this->payMethode;
+    }
+
+    /**
+     * Get the value of Status
+     */
+    public function getStatus()
+    {
+        return $this->Status;
+    }
+
+    /**
+     * Get the value of State
+     */
+    public function getState()
+    {
+        return $this->State;
     }
 }

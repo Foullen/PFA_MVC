@@ -6,6 +6,8 @@ require_once("{$ROOT}{$DS}model{$DS}ModelUser.php"); // chargement du modèle Us
 require_once("{$ROOT}{$DS}model{$DS}ModelCity.php"); // chargement du modèle City
 require_once("{$ROOT}{$DS}model{$DS}ModelTheme.php"); // chargement du modèle Theme
 require_once("{$ROOT}{$DS}model{$DS}ModelProduct.php"); // chargement du modèle Product
+require_once("{$ROOT}{$DS}model{$DS}ModelCommand.php"); // chargement du modèle Command
+
 
 
 if (isset($_REQUEST['action'])) {
@@ -498,6 +500,7 @@ switch ($action) {
             $pagetitle = "ADMIN COMMANDS Managment | Fundly";
             $view = "commands";
             $HTMLbodyId = "aUserManagment";
+            $tab_com = ModelCommand::getAll();
             require("{$ROOT}{$DS}view{$DS}view.php");
         } // commands
         break;

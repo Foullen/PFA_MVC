@@ -51,6 +51,24 @@ class Model
             return $rslt;
         }
     }
+
+    public function getAllByColumn($column, $Value)
+    {
+        $sql = "SELECT * from " . static::$table . " WHERE " . $column . "=:column_value";
+        $req_prep = self::$pdo->prepare($sql);
+        $req_prep->bindParam(":column_value", $Value);
+        $req_prep->execute();
+        $req_prep->setFetchMode(
+            PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
+            'Model' . ucfirst(static::$table)
+        );
+        if ($req_prep->rowCount() == 0) {
+            return null;
+        } else {
+            $rslt = $req_prep->fetchAll();
+            return $rslt;
+        }
+    }
     public function delete($cle_primaire)
     {
         $sql = "DELETE FROM " . static::$table . " WHERE " . static::$primary . "=:cle_primaire";
@@ -119,7 +137,7 @@ class Model
         foreach ($tab as $cle => $valeur)
             $values[":" . $cle] = $valeur;
         $req_prep->execute($values);
-        $last_id = $req_prep->lastInsertId();
+        $last_id =  Model::$pdo->lastInsertId();
         return $last_id;
     }
 }
