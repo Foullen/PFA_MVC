@@ -19,8 +19,8 @@ if (isset($_REQUEST['controller']) and $_REQUEST['controller'] != 'home') {
         <nav class="main-nav">
             <ul class="nav__list">
                 <li class="nav__list-item"><a href="/pfa/" class="nav__link">Home</a></li>
-                <li class="nav__list-item"><a href="#" class="nav__link">About</a></li>
-                <li class="nav__list-item"><a href="#" class="nav__link">Causes</a></li>
+                <!-- <li class="nav__list-item"><a href="#" class="nav__link">About</a></li>
+                <li class="nav__list-item"><a href="#" class="nav__link">Causes</a></li> -->
                 <li class="nav__list-item"><a href="/pfa/?controller=product" class="nav__link">Products</a></li>
             </ul>
         </nav>

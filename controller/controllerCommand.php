@@ -54,24 +54,24 @@ switch (strtolower($action)) {
                     $product = ModelProduct::select($productKey);
                     if ($product->getStock() - $qte < 0) {
                         $quntity = $qte +  ($product->getStock() -  $qte);
-                        $detailCommandObject = new ModelDetailCommand(NULL, $productKey, $quntity, NULL);
+                        $detailCommandObject = new ModelDetailCommand(NULL, $productKey, $quntity); //, NULL);
                         $tab_dc = array(
                             'idCommand' => $lastIdCommand,
                             'idProduct' => $productKey,
                             'Quantity' => $quntity,
-                            'Remise' => NULL,
+                            //'Remise' => NULL,
                         );
                         $detailCommandObject->insert($tab_dc);
                         echo "<br>";
                         print_r($detailCommandObject);
                     } else {
                         // echo "inajem yechri";
-                        $detailCommandObject = new ModelDetailCommand(NULL, $productKey, $qte, NULL);
+                        $detailCommandObject = new ModelDetailCommand(NULL, $productKey, $qte); //, NULL);
                         $tab_dc = array(
                             'idCommand' => $lastIdCommand,
                             'idProduct' => $productKey,
                             'Quantity' => $qte,
-                            'Remise' => NULL,
+                            // 'Remise' => NULL,
                         );
                         $detailCommandObject->insert($tab_dc);
 

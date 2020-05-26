@@ -23,9 +23,9 @@
             foreach ($tab_u as $key => $u) {
 
                 if ($u->getUStatus() == 1) {
-                    $Statusthumb = "<i class=\"fa fa-thumbs-up w3-text-green\" aria-hidden=\"true\"></i>";
+                    $Statusthumb = "<a href=\"?index.php&controller=admin&action=users&task=desactive&id={$u->getIdUser()}\"><i class=\"fa fa-thumbs-up w3-text-green\" aria-hidden=\"true\"></i></a>";
                 } else {
-                    $Statusthumb = "<i class=\"fa fa-thumbs-down w3-text-red\" aria-hidden=\"true\"></i>";
+                    $Statusthumb = "<a href=\"?index.php&controller=admin&action=users&task=active&id={$u->getIdUser()}\"><i class=\"fa fa-thumbs-down w3-text-red\" aria-hidden=\"true\"></i></a>";
                 }
 
                 if ($u->Role == 1) {
@@ -52,9 +52,7 @@
                 <td>" . $u->BirthDate . "</td>
                 <td>" . $RoleTxt . "</td>
                 <td class=\"w3-text-red w3-center\">
-                    <a href=\"#\">
-                        " . $Statusthumb . "
-                    </a>
+                    " . $Statusthumb . "
                 </td>
             </tr>
                     ";

@@ -25,5 +25,11 @@
     </div>
 </section>
 
-<section id="section2"></section>
+<p style="
+    background-color: white;
+    text-align: center;
+    margin: 0;
+">Developped by Adem Fatnassi and Mouhib ben Gayes as part of a year-end project 2019-2020 copyright &copy; 2020 All rights reserved</p>
+
+<!-- <section id="section2"></section> -->
 <script src="./JS/observers.js"></script>

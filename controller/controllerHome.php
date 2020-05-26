@@ -1,6 +1,6 @@
 <?php
 
-print_r($_SESSION);
+// print_r($_SESSION);
 if (isset($_SESSION['userId']) and $_SESSION['userId'] == 1) {
     header('Location: ?index.php&controller=admin');
 }

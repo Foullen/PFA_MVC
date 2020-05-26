@@ -20,7 +20,7 @@ if (isset($_REQUEST['action'])) {
 switch ($action) {
     case "account": {
             if (isset($_SESSION['userId'])) {
-                if ($_SESSION['userId'] == 1) {
+                if ($_SESSION['role'] == 1) {
                     header('Location: ?index.php&controller=admin');
                 }
             } else {
@@ -36,6 +36,11 @@ switch ($action) {
         break;
     case "cart": {
             // session_start();
+            if (isset($_SESSION['userId'])) {
+                if ($_SESSION['role'] == 1) {
+                    header('Location: ?index.php&controller=admin');
+                }
+            }
             $pagetitle = 'Cart | Fundly';
             $view = "cart";
             $HTMLbodyId = "CartPage";
@@ -71,8 +76,11 @@ switch ($action) {
         }
         break;
     case "edit": {
-            if (isset($_REQUEST['id'])) {
-                $id = $_REQUEST['id'];
+            if (isset($_SESSION['userId'])) {
+                if ($_SESSION['role'] == 1) {
+                    header('Location: ?index.php&controller=admin');
+                }
+                $id = $_SESSION['userId'];
                 $pagetitle = 'Edit Profile | Fundly';
                 $view = "edit";
                 $HTMLbodyId = "updateaccountPage";
@@ -83,6 +91,11 @@ switch ($action) {
         }
         break;
     case "join": {
+            if (isset($_SESSION['role']) and $_SESSION['role'] == 2) {
+                header('Location: /pfa/index/client/');
+            } elseif (isset($_SESSION['role']) and $_SESSION['role'] == 1) {
+                header('Location: ?index.php&controller=admin');
+            }
             $pagetitle = 'Join | Fundly';
             $view = "join";
             $HTMLbodyId = "JoinPage";
@@ -120,7 +133,7 @@ switch ($action) {
                     "addresse" => $addresse,
                     "zip" => $zip,
                     "email" => $email,
-                    "password" => $password,
+                    "password" => md5($password),
                     "gender" => $gender,
                     "idCity" => $idCity,
                     "role" => $role,
@@ -147,12 +160,55 @@ switch ($action) {
         }
         break;
     case "login": {
-
+            if (isset($_SESSION['role']) and $_SESSION['role'] == 2) {
+                header('Location: ?index.php');
+            } elseif (isset($_SESSION['role']) and $_SESSION['role'] == 1) {
+                header('Location: ?index.php&controller=admin');
+            }
             $pagetitle = 'Login | Fundly';
             $view = "login";
             $HTMLbodyId = "LoginPage";
             require("{$ROOT}{$DS}view{$DS}view.php");
         }
+        break;
+    case "desactive": {
+            if (isset($_SESSION['userId'])) {
+                $id = $_SESSION['userId'];
+                $user = ModelUser::select($id);
+                if ($user != NULL) {
+                    $tab = array(
+                        "uStatus" => 2,
+                    );
+                    $u = $user->update($tab, $id);
+                    session_start();
+                    session_unset();
+                    session_destroy();
+                    header('location: ?index.php&controller=client&action=login');
+                } else {
+                    header('Location: ?index.php&controller=client&action=edit');
+                }
+
+                require("{$ROOT}{$DS}view{$DS}view.php");
+            }
+        } //desactive/
+        break;
+    case "delete": {
+            if (isset($_SESSION['userId'])) {
+                $id = $_SESSION['userId'];
+                $del = ModelUser::select($id);
+                if ($del != null) {
+                    $del->delete($id);
+                    session_start();
+                    session_unset();
+                    session_destroy();
+                    header('location: ?index.php&controller=client&action=login');
+                } else {
+                    header('Location: ?index.php');
+                }
+
+                require("{$ROOT}{$DS}view{$DS}view.php");
+            }
+        } //desactive/
         break;
     case "check": {
             // Recuperer de XMLHttpRequest de la viewJoinClient
@@ -173,15 +229,18 @@ switch ($action) {
 
                 // $pwd = MD5($_REQUEST["pwd"]);
 
-                $recherche = ModelUser::login($email, $pwd);
+                $recherche = ModelUser::login($email, md5($pwd));
 
                 print_r($recherche);
 
-                if ($recherche != null) {
+                if ($recherche != null and  $recherche->getUStatus() != 2) {
                     session_start();
                     $_SESSION['userId'] = $recherche->getIdUser();
                     $_SESSION['role'] = $recherche->Role;
                     // $_SESSION['panier'] = array();
+                    if ($recherche->Role == 1) {
+                        header("Location: ?index.php&controller=admin}");
+                    }
                     header("Location: ?index.php&controller=client&id={$recherche->getIdUser()}");
                     // $msg = "login avec success";
                     // $pagetitle = 'Account Creation';
@@ -195,6 +254,8 @@ switch ($action) {
                     $HTMLbodyId = "accountCreation";
                     require("{$ROOT}{$DS}view{$DS}view.php");
                 }
+            } else {
+                header("Location: ?index.php&controller=client&action=login");
             }
         }
         break;
@@ -221,6 +282,7 @@ switch ($action) {
             } elseif (isset($_REQUEST['email']) && isset($_REQUEST['pwd'])) {
                 // echo $_REQUEST['email'] . " pass: " . empty($_REQUEST['pwd']) . "<br>";
                 $user->Email = $_REQUEST['email'];
+                $user->Password = md5($_REQUEST['pwd']);
                 // password here
             } elseif (isset($_REQUEST['addresse']) && isset($_REQUEST['region']) && isset($_REQUEST['zip']) && isset($_REQUEST['phone'])) {
                 // echo $_REQUEST['region'] . " " . $_REQUEST['addresse'] . " " . $_REQUEST['zip'] . " " . $_REQUEST['phone'] . "<br>";
@@ -242,11 +304,12 @@ switch ($action) {
             $zip = $user->ZIP;
             $email = $user->Email;
             $password = $user->Password;
-            // if (empty($password)) {
-            //     $password = $user->Password;
-            // } else {
-            //     # Some treatment here if I decied to crypt new password
-            // }
+            if (empty($password)) {
+                $password = $user->Password;
+            } else {
+                # Some treatment here if I decied to crypt new password
+                $password = $user->Password;
+            }
             $gender = $user->Gender;
             $role = $user->Role;
             $uStatus = $user->getUStatus();

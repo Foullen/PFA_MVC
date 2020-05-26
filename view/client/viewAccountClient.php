@@ -1,10 +1,10 @@
 <section id="section1">
     <h2 class="accountTextHeader">Hi,<span class="accountSpanHeader"><?= $user->Prenom ?></span></h2>
     <article class="articleP1">
-        <a href="index/client/command/" class="articleP1__link ">Commands(<span class="artibadge">0</span>)</a>
-        <a href="?index.php&controller=client&action=edit&id=<?= $user->getIdUser() ?>" class="articleP1__link ">Edit my profile</a>
+        <a href="index/client/command/" class="articleP1__link ">My Commands</a>
+        <a href="?index.php&controller=client&action=edit" class="articleP1__link ">Edit my profile</a>
         <!-- index/client/edit/1/ -->
-        <a href="#" class="articleP1__link ">log out</a>
+        <a href="?index.php&controller=client&action=logout" class="articleP1__link ">log out</a>
     </article>
     <article class="articleP2">
         <h4 class="accountInfotitle">Name: <span class="accountInfoData"><?= $user->Prenom . " " . $user->Nom ?></span></h4>

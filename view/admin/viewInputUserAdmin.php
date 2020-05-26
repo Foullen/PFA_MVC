@@ -46,6 +46,7 @@
             <div class="inputField adminUserMang__inputs">
                 <label for="repwd" class="name-field-label">Repeat Password</label>
                 <input type="password" name="repwd" id="repwd" class="repwd field-input" placeholder="e.g ●●●●●●●●●">
+                <span id='message'></span>
             </div>
         </div>
         <!-- 
@@ -143,4 +144,10 @@
             }
         });
     }); //If input value is not empty on loading data from database for updating
+    $('#pwd, #repwd').on('keyup', function() {
+        if ($('#pwd').val() == $('#repwd').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
 </script>

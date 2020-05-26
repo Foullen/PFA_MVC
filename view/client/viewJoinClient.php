@@ -80,6 +80,7 @@
                 <div class="repwd-section">
                     <label for="join__name" class="repwd-field-label">Repeat your Password</label>
                     <input type="password" name="repwd" id="join__repwd" class="join__repwd">
+                    <span id='message'></span>
                 </div>
             </div>
             <!-- <div class="guide_btn">
@@ -105,7 +106,15 @@
     </div>
 </div>
 <script src="./JS/w3schoolCheat.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+    $('#join__pwd, #join__repwd').on('keyup', function() {
+        if ($('#join__pwd').val() == $('#join__repwd').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+
     function CheckEmail() {
         var Email = document.getElementById('join__email');
         if (Email.value != "") {

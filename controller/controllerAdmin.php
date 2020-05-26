@@ -7,7 +7,7 @@ require_once("{$ROOT}{$DS}model{$DS}ModelCity.php"); // chargement du modèle Ci
 require_once("{$ROOT}{$DS}model{$DS}ModelTheme.php"); // chargement du modèle Theme
 require_once("{$ROOT}{$DS}model{$DS}ModelProduct.php"); // chargement du modèle Product
 require_once("{$ROOT}{$DS}model{$DS}ModelCommand.php"); // chargement du modèle Command
-
+require_once("{$ROOT}{$DS}model{$DS}ModelDetailCommand.php"); // chargement du modèle detailCommand
 
 
 if (isset($_REQUEST['action'])) {
@@ -61,9 +61,46 @@ switch ($action) {
                             $HTMLbodyId = "aUserManagment";
                             $user = ModelUser::select($id);
                             $city = ModelCity::select($user->getIdCity());
+                            $tab_com = ModelCommand::getAllByColumn("idUser", $id);
+
                             require("{$ROOT}{$DS}view{$DS}view.php");
                         }
                     } //users/task/detail
+                    break;
+                case "active": {
+                        if (isset($_REQUEST['id'])) {
+                            $id = $_REQUEST['id'];
+                            $user = ModelUser::select($id);
+                            if ($user != NULL) {
+                                $tab = array(
+                                    "uStatus" => 1,
+                                );
+                                $u = $user->update($tab, $id);
+                                header('Location: ?index.php&controller=admin&action=users');
+                            } else {
+                                header('Location: ?index.php&controller=admin&action=users');
+                            }
+
+                            require("{$ROOT}{$DS}view{$DS}view.php");
+                        }
+                    } //users/task/active/:id
+                case "desactive": {
+                        if (isset($_REQUEST['id'])) {
+                            $id = $_REQUEST['id'];
+                            $user = ModelUser::select($id);
+                            if ($user != NULL) {
+                                $tab = array(
+                                    "uStatus" => 2,
+                                );
+                                $u = $user->update($tab, $id);
+                                header('Location: ?index.php&controller=admin&action=users');
+                            } else {
+                                header('Location: ?index.php&controller=admin&action=users');
+                            }
+
+                            require("{$ROOT}{$DS}view{$DS}view.php");
+                        }
+                    } //users/task/desactive/:id
                     break;
                 case "edit":
                 case "add": {
@@ -190,7 +227,7 @@ switch ($action) {
                                 "adresse" => $addresse,
                                 "zip" => $zip,
                                 "email" => $email,
-                                "password" => $password,
+                                "password" => md5($password),
                                 "gender" => $gender,
                                 "idCity" => $idCity,
                                 "role" => $role,
@@ -199,6 +236,7 @@ switch ($action) {
                             );
                             if ($user != null) {
                                 $u = $user->update($tab, $oldId);
+                                header('Location: ?index.php&controller=admin&action=users');
                                 // print_r($u, false);
                                 // print_r($user, false);
                                 // print_r($tab, false);

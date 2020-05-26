@@ -34,7 +34,7 @@
             <?php
             ($task == 'edit') ? $priceValue = "value=\"" . $product->getPrice() . "\"" : $priceValue = "";
             ?>
-            <input type="number" <?= $priceValue ?> name="price" id="price" class="price field-input" placeholder="e.g 99 $">
+            <input type="number" step="0.001" <?= $priceValue ?> name="price" id="price" class="price field-input" placeholder="e.g 99 $">
         </div>
         <div class="inputField adminUserMang__inputs">
             <label for="stock" class="name-field-label">Stock</label>

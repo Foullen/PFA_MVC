@@ -5,18 +5,18 @@ class ModelDetailCommand extends Model
     private $idCommand;
     private $idProduct;
     private $Quantity;
-    private $Remise;
+    // private $Remise;
 
     protected static $table = 'detailcommand';
     protected static $primary = 'idCommand';
     protected static $primary2 = 'idProduct';
 
-    public function __construct($idCommand = NULL, $idProduct = NULL, $Quantity = NULL, $Remise = NULL)
+    public function __construct($idCommand = NULL, $idProduct = NULL, $Quantity = NULL) //, $Remise = NULL)
     {
         $this->idCommand = $idCommand;
         $this->idProduct = $idProduct;
         $this->Quantity = $Quantity;
-        $this->Remise = $Remise;
+        // $this->Remise = $Remise;
     }
 
     /**
@@ -45,9 +45,9 @@ class ModelDetailCommand extends Model
 
     /**
      * Get the value of Remise
-     */
+     
     public function getRemise()
     {
         return $this->Remise;
-    }
+    }*/
 }

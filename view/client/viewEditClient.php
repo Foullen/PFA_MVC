@@ -52,6 +52,8 @@
                     <div class="inputField">
                         <label for="repwd" class="name-field-label">Repeat Password</label>
                         <input type="password" name="repwd" id="repwd" class="repwd field-input" placeholder="e.g ●●●●●●●●●">
+                        <span id='message'></span>
+
                     </div>
                 </div>
                 <input type="submit" value="save" name="SecondTab">
@@ -98,10 +100,10 @@
         </div>
     </div>
     <div class="InfoCollapse">
-        <a href="#" class="collapse_link desactive_link">Deactivate your account</a>
+        <a href="?index.php&controller=client&action=desactive" class="collapse_link desactive_link">Deactivate your account</a>
     </div>
     <div class="InfoCollapse">
-        <a href="#" class="collapse_link delete_link">Delete your account</a>
+        <a href="?index.php&controller=client&action=delete" class="collapse_link delete_link">Delete your account</a>
     </div>
 
 
@@ -125,6 +127,13 @@
             }
         });
     }
+
+    $('#pwd, #repwd').on('keyup', function() {
+        if ($('#pwd').val() == $('#repwd').val()) {
+            $('#message').html('Matching').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
 
     $('input').on('focusin', function() {
         $(this).parent().find('label').addClass('Iactive');

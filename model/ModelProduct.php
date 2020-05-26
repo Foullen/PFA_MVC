@@ -36,7 +36,7 @@ class ModelProduct extends Model
     {
         $SQL = "SELECT * FROM " . static::$table;
         if ($params != null) {
-            $SQL .= " WHERE idTheme=" . $params;
+            $SQL .= " WHERE stock>0 and idTheme=" . $params;
         }
         $rep = self::$pdo->query($SQL);
         $rep->setFetchMode(
@@ -46,6 +46,23 @@ class ModelProduct extends Model
 
         return $rep->fetchAll();
     }
+
+    public function search($params)
+    {
+        $SQL = "SELECT * FROM " . static::$table;
+        if ($params != null) {
+            $SQL .= " WHERE Title Like '%" . $params . "%'";
+        }
+        // echo $SQL;
+        $rep = self::$pdo->query($SQL);
+        $rep->setFetchMode(
+            PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
+            'Model' . ucfirst(static::$table)
+        );
+
+        return $rep->fetchAll();
+    }
+
 
     /**
      * Get the value of idProduct

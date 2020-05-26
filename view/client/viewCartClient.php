@@ -18,7 +18,7 @@ session_start();
         </div>
         <?php
         if ($total > 0) {
-            echo '<button  onclick="document.getElementById(\'paymentModal\').style.display=\'block\'" class="buyAll_cart w3-hover-shadow">Buy all</button>';
+            echo '<button onclick="" id="buyAll_cart" class="buyAll_cart w3-hover-shadow">Buy all</button>';
             echo '
             <div id="paymentModal" class="w3-modal">
             <div class="w3-modal-content w3-card-4">
@@ -83,6 +83,7 @@ session_start();
 <script>
     // Get the modal
     var modal = document.getElementById('paymentModal');
+    var buyAll_cart = document.getElementById('buyAll_cart');
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
@@ -90,4 +91,21 @@ session_start();
             modal.style.display = "none";
         }
     }
+
+    var id = <?php if (isset($_SESSION['userId'])) {
+                    echo $_SESSION['userId'];
+                } else {
+                    echo "'((p))'";
+                }
+                ?>
+
+    buyAll_cart.addEventListener('click', () => {
+        console.log(id);
+        if (isNaN(id)) {
+            // alert('not number');
+            window.location.href = "?index.php&controller=client&action=login";
+        } else {
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+    })
 </script>

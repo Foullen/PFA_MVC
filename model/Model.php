@@ -62,12 +62,12 @@ class Model
             PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE,
             'Model' . ucfirst(static::$table)
         );
-        if ($req_prep->rowCount() == 0) {
-            return null;
-        } else {
-            $rslt = $req_prep->fetchAll();
-            return $rslt;
-        }
+        // if ($req_prep->rowCount() == 0) {
+        //     return null;
+        // } else {
+        $rslt = $req_prep->fetchAll();
+        return $rslt;
+        // }
     }
     public function delete($cle_primaire)
     {

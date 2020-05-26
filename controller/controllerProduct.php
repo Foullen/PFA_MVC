@@ -26,10 +26,13 @@ switch (strtolower($action)) {
                 /* recupère l'theme passée dans l'URL*/
                 $theme = $_REQUEST['theme'];
                 settype($theme, "int"); // set theme type to handle it after, to display product of theme
+                $tab_p = ModelProduct::selectAll($theme);
+            } elseif (isset($_REQUEST['search'])) {
+                $tab_p = ModelProduct::search($_REQUEST['search']);
             } else {
                 $theme = NULL;
+                $tab_p = ModelProduct::selectAll($theme);
             }
-            $tab_p = ModelProduct::selectAll($theme);
             // if (count(ModelProduct::selectAll($theme)) == 0) {
             //     $tab_p = ModelProduct::selectAll(NULL);
             //     // if there is no product with same idTheme we pass NULL to the methode and display all products 
