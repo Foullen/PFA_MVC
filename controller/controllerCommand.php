@@ -108,7 +108,47 @@ switch (strtolower($action)) {
                 // require("{$ROOT}{$DS}view{$DS}view.php");
                 $oldId = $_REQUEST['idcommand'];
                 $command = ModelCommand::select($oldId);
-                if ($_REQUEST['status'] == 2) {
+                $status = $_REQUEST['status'];
+                if ($status == 2) {
+                    $detailCommand = ModelDetailCommand::getAllByColumn("idCommand ", $command->getIdCommand());
+                    if (empty($detailCommand)) {
+                        echo "videe";
+                    } else {
+                        $totalDetailCommand = 0;
+                        $detailCommandOut = 0;
+                        print_r($detailCommand);
+                        foreach ($detailCommand as $detail) {
+                            $totalDetailCommand++;
+                            $product = ModelProduct::select($detail->getIdProduct());
+                            if ($product->getStock() > $detail->getQuantity()) {
+                                echo ("stock::" . $product->getStock());
+                                echo (">qte::" . $detail->getQuantity() . "<br>");
+                                $tab = array(
+                                    'idProduct' => $product->getIdProduct(),
+                                    'Stock' => $product->getStock() - $detail->getQuantity(),
+                                );
+                                $p = $product->update($tab, $product->getIdProduct());
+                            } elseif ($product->getStock() < $detail->getQuantity()) {
+                                $detailCommandOut++;
+                                $id = $detail->getIdProduct();
+                                echo ("stock::" . $product->getStock());
+                                echo (" < qte::" . $detail->getQuantity() . "<br>");
+                                $del = ModelDetailCommand::getAllByColumn("idProduct ", $detail->getIdProduct());
+                                // print_r($del[0]);
+                                if ($del[0] != null) {
+                                    $del[0]->deleteBy($command->getIdCommand(), $detail->getIdProduct());
+                                    // echo "deleted from detailCommand";
+                                }
+                                // $status = 3;
+                                // nfassa5 detail command za33ma ki tabda <qte ,
+                                // w mba3ed ken e elkolhoum <qte , raw el compteur 9ad elli fassa5thhoum
+                            }
+                        }
+                        if ($totalDetailCommand == $detailCommandOut) {
+                            echo "command rejected";
+                            $status = 3;
+                        }
+                    }
                     $state = 2;
                 } else {
                     $state = 1;
@@ -118,13 +158,13 @@ switch (strtolower($action)) {
                     'idUser' => $command->getIdUSer(),
                     'CommandDate' => $command->getCommandDate(),
                     'LiveredDate' => date("Y-m-d"),
-                    'Status' => $_REQUEST['status'],
+                    'Status' => $status,
                     'State' => $state,
                     'payMethode' => $command->getPayMethode()
                 );
-                // echo "<pre>";
-                // print_r($tab_c);
-                // echo "</pre>";
+                echo "<pre>";
+                print_r($tab_c);
+                echo "</pre>";
                 if ($command != NULL) {
                     $com = $command->update($tab_c, $oldId);
                 }

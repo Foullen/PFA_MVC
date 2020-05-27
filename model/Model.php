@@ -76,6 +76,7 @@ class Model
         $req_prep->bindParam(":cle_primaire", $cle_primaire);
         $req_prep->execute();
     }
+
     public function update($tab, $cle_primaire)
     {
         $sql = "UPDATE " . static::$table . " SET";

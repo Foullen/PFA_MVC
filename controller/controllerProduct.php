@@ -48,7 +48,7 @@ switch (strtolower($action)) {
             $id = $_REQUEST['id'];
             $p = ModelProduct::select($id);
             if ($p != null) {
-                $pagetitle =  $id . ' | Fundly';
+                $pagetitle =  $p->getTitle() . ' | Fundly';
                 $view = "read";
                 $HTMLbodyId = "ProductItemPage";
                 require("{$ROOT}{$DS}view{$DS}view.php");

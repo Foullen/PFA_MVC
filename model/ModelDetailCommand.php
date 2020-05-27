@@ -19,6 +19,16 @@ class ModelDetailCommand extends Model
         // $this->Remise = $Remise;
     }
 
+    public function deleteBy($command, $product)
+    {
+        // DELETE FROM `detailcommand` WHERE `detailcommand`.`idCommand` = 10 AND `detailcommand`.`idProduct` = 2
+        $sql = "DELETE FROM " . static::$table . " WHERE `detailcommand`.`idCommand` =:column1_value AND `detailcommand`.`idProduct` =:column2_value";
+        $req_prep = self::$pdo->prepare($sql);
+        $req_prep->bindParam(":column1_value", $command);
+        $req_prep->bindParam(":column2_value", $product);
+        $req_prep->execute();
+    }
+
     /**
      * Get the value of idCommand
      */
